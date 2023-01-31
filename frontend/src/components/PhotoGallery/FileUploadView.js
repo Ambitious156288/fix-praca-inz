@@ -44,7 +44,7 @@ const FileUploadView = (props) => {
             const formData = new FormData();
             formData.append('file', singleFile);
             await singleFileUpload(formData, singleFileOptions);
-            props.getsingle();
+            // props.getsingle();
         // }
     }
 

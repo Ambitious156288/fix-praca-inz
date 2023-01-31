@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/singleFile', [auth, photoGallery.single('file')], singleFileUpload);
 router.post('/multipleFiles', photoGallery.array('files'), multipleFileUpload);
-router.get('/getSingleFiles', getallSingleFiles);
+router.get('/getSingleFiles', auth, getallSingleFiles);
 router.get('/getMultipleFiles', getallMultipleFiles);
 router.delete('/single/:id', deletePhoto);
 router.delete('/gallery/:id', deleteGallery);

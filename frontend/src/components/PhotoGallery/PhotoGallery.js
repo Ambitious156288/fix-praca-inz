@@ -40,13 +40,12 @@ function PhotoGallery() {
   const [token, setToken] = useState('')
 
   const getSingleFileslist = async () => {
-    // try {
-    //     const fileslist = await getSingleFiles();
-    //     setSingleFiles(fileslist);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    console.log('wtf')
+    try {
+        const fileslist = await getSingleFiles({headers: { Authorization:  localStorage.getItem('tokenStore') }});
+        setSingleFiles(fileslist);
+    } catch (error) {
+      console.log(error);
+    }
   }
   
   const getMultipleFilesList = async () => {
@@ -57,8 +56,6 @@ function PhotoGallery() {
       console.log(error);
     }
   }
-  
-
 
 const handleDeleteImage = async (id)=>{
     await axios.delete('http://localhost:8080/api/single/' + id)
@@ -70,32 +67,17 @@ const handleDeleteGallery = async (galleryId)=>{
     setMultipleFiles(prev=>prev.filter(gallery=>gallery._id !== galleryId))
 }
 
-//
-const getNotes = async (token) => {
-  console.log('getNotes')
-  const res = await axios.get('http://localhost:8080/api/getSingleFiles', {
-      headers: { Authorization: token }
-  })
-  console.log('res',res)
-  setSingleFiles(res.data)
-}
+
 
 useEffect(() => {
-  const token = localStorage.getItem('tokenStore')
-  setToken(token)
-  if (token) {
-      getNotes(token)
-  }
-
-  console.log('singleFiles',singleFiles)
-  // getSingleFileslist();
+  getSingleFileslist();
   getMultipleFilesList();
-}, []);
+}, [singleFiles]);
 
   return (
     <>
        <Grid container spacing={3}>
-                <FileUploadView getsingle={getNotes} getMultiple={() => getMultipleFilesList()}/>
+                <FileUploadView getsingle={getSingleFileslist} getMultiple={() => getMultipleFilesList()}/>
 
                 <Grid item xs={6}>
                         <hr/>

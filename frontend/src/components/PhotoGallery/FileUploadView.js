@@ -36,7 +36,8 @@ const FileUploadView = (props) => {
             const {loaded, total} = progressEvent;
             const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
             setMultipleProgress(percentage);
-        }
+        },
+        headers: { Authorization:  localStorage.getItem('tokenStore') }
     }
     const uploadSingleFile = async () => {
         const token = localStorage.getItem('tokenStore')
@@ -55,7 +56,7 @@ const FileUploadView = (props) => {
             formData.append('files', multipleFiles[i]);                      
         }
         await multipleFilesUpload(formData, mulitpleFileOptions);
-        props.getMultiple();
+        // props.getMultiple();
     }
     
     return (

@@ -31,7 +31,8 @@ export const multipleFileUpload = async (req, res, next) => {
         });
         const multipleFiles = new multipleGallery({
             title: req.body.title,
-            files: filesArray 
+            files: filesArray,
+            user_id: req.user.id,
         });
         await multipleFiles.save();
         res.status(201).send('Files Uploaded Successfully');
@@ -51,7 +52,7 @@ export const getallSingleFiles = async (req, res, next) => {
 
 export const getallMultipleFiles = async (req, res, next) => {
     try{
-        const files = await multipleGallery.find();
+        const files = await multipleGallery.find({ user_id: req.user.id });
         res.status(200).send(files);
     }catch(error) {
         res.status(400).send(error.message);

@@ -50,7 +50,7 @@ function PhotoGallery() {
   
   const getMultipleFilesList = async () => {
     try {
-        const fileslist = await getMultipleFiles();
+        const fileslist = await getMultipleFiles({headers: { Authorization:  localStorage.getItem('tokenStore') }});
         setMultipleFiles(fileslist);
     } catch (error) {
       console.log(error);
@@ -72,12 +72,12 @@ const handleDeleteGallery = async (galleryId)=>{
 useEffect(() => {
   getSingleFileslist();
   getMultipleFilesList();
-}, [singleFiles]);
+}, [singleFiles, multipleFiles]);
 
   return (
     <>
        <Grid container spacing={3}>
-                <FileUploadView getsingle={getSingleFileslist} getMultiple={() => getMultipleFilesList()}/>
+                <FileUploadView getsingle={getSingleFileslist} getMultiple={getMultipleFilesList}/>
 
                 <Grid item xs={6}>
                         <hr/>

@@ -5,7 +5,11 @@ const multipleGallerySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    files: [Object]
+    files: [Object],
+    user_id: {
+        type: String,
+        required: true,
+    },
 });
 
 const multipleGallery = mongoose.model("multipleGallery", multipleGallerySchema);

@@ -7,9 +7,9 @@ import auth from '../middleware/auth.js'
 const router = express.Router();
 
 router.post('/singleFile', [auth, photoGallery.single('file')], singleFileUpload);
-router.post('/multipleFiles', photoGallery.array('files'), multipleFileUpload);
+router.post('/multipleFiles', [auth, photoGallery.array('files')], multipleFileUpload);
 router.get('/getSingleFiles', auth, getallSingleFiles);
-router.get('/getMultipleFiles', getallMultipleFiles);
+router.get('/getMultipleFiles', auth, getallMultipleFiles);
 router.delete('/single/:id', deletePhoto);
 router.delete('/gallery/:id', deleteGallery);
 

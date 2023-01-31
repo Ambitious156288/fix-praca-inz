@@ -37,14 +37,16 @@ const StyledImg = styled.img`
 function PhotoGallery() {
   const [singleFiles, setSingleFiles] = useState([]);
   const [multipleFiles, setMultipleFiles] = useState([]);
+  const [token, setToken] = useState('')
 
   const getSingleFileslist = async () => {
-    try {
-        const fileslist = await getSingleFiles();
-        setSingleFiles(fileslist);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //     const fileslist = await getSingleFiles();
+    //     setSingleFiles(fileslist);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    console.log('wtf')
   }
   
   const getMultipleFilesList = async () => {
@@ -68,15 +70,32 @@ const handleDeleteGallery = async (galleryId)=>{
     setMultipleFiles(prev=>prev.filter(gallery=>gallery._id !== galleryId))
 }
 
+//
+const getNotes = async (token) => {
+  console.log('getNotes')
+  const res = await axios.get('http://localhost:8080/api/getSingleFiles', {
+      headers: { Authorization: token }
+  })
+  console.log('res',res)
+  setSingleFiles(res.data)
+}
+
 useEffect(() => {
-  getSingleFileslist();
+  const token = localStorage.getItem('tokenStore')
+  setToken(token)
+  if (token) {
+      getNotes(token)
+  }
+
+  console.log('singleFiles',singleFiles)
+  // getSingleFileslist();
   getMultipleFilesList();
 }, []);
 
   return (
     <>
        <Grid container spacing={3}>
-                <FileUploadView getsingle={() => getSingleFileslist()} getMultiple={() => getMultipleFilesList()}/>
+                <FileUploadView getsingle={getNotes} getMultiple={() => getMultipleFilesList()}/>
 
                 <Grid item xs={6}>
                         <hr/>

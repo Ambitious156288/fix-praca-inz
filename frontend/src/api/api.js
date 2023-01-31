@@ -12,8 +12,11 @@ export const singleFileUpload = async (data, options) => {
 export const getSingleFiles = async () => {
   try {
     const { data } = await axios.get(apiUrl + 'getSingleFiles');
+    console.log('getSingleFiles')
+    // console.log('data',data)
     return data;
   } catch (error) {
+    console.log('getSingleFiles err')
     throw error;
   }
 };

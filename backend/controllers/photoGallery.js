@@ -7,7 +7,8 @@ export const singleFileUpload = async (req, res, next) => {
             fileName: req.file.originalname,
             filePath: req.file.path,
             fileType: req.file.mimetype,
-            fileSize: fileSizeFormatter(req.file.size, 2)
+            fileSize: fileSizeFormatter(req.file.size, 2),
+            user_id: req.user.id,
         });
         await file.save();
         res.status(201).send('File Uploaded Successfully');
@@ -41,7 +42,7 @@ export const multipleFileUpload = async (req, res, next) => {
 
 export const getallSingleFiles = async (req, res, next) => {
     try{
-        const files = await singleGallery.find();
+        const files = await singleGallery.find({ user_id: req.user.id });
         res.status(200).send(files);
     }catch(error) {
         res.status(400).send(error.message);

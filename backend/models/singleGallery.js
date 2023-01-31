@@ -16,7 +16,11 @@ const singleGallerySchema = new mongoose.Schema({
     fileSize: {
         type: String,
         required: true
-    }
+    },
+    user_id: {
+        type: String,
+        required: true,
+    },
 });
 
 const singleGallery = mongoose.model("singleGallery", singleGallerySchema);

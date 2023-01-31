@@ -72,7 +72,7 @@ const handleDeleteGallery = async (galleryId)=>{
 useEffect(() => {
   getSingleFileslist();
   getMultipleFilesList();
-}, [singleFiles, multipleFiles]);
+}, []);
 
   return (
     <>

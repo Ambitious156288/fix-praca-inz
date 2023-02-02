@@ -9,6 +9,10 @@ const variousFileSchema = new mongoose.Schema({
   path: { type: String, default: "" },
   parent: { type: mongoose.ObjectId , ref: "File" },
   children: [{ type: mongoose.ObjectId , ref: "File" }],
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 const variousFile = mongoose.model("variousFile", variousFileSchema);

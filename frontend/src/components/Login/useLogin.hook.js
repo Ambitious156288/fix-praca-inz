@@ -29,6 +29,7 @@ const useLogin = ({ setIsLogin }) => {
 
   const loginSubmit = async e => {
     e.preventDefault();
+    
     try {
       const res = await axios.post('/users/login', {
         email: user.email,
@@ -37,6 +38,7 @@ const useLogin = ({ setIsLogin }) => {
       setUser({ name: '', email: '', password: '' });
       localStorage.setItem('tokenStore', res.data.token);
       setIsLogin(true);
+      window.location.reload(true);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
     }

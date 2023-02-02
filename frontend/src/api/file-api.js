@@ -8,6 +8,8 @@ import axios from "axios";
 
 const SERVER_HOST = "http://localhost:8080/";
 
+const userInfoAuth =  { headers: { Authorization:  localStorage.getItem('tokenStore') }};
+
 export const instanceAxios = axios.create({
   baseURL: `${SERVER_HOST}api/`,
 });
@@ -16,18 +18,18 @@ export const fileAPI = {
   getFiles(dirId, sort) {
     if (dirId) {
       return instanceAxios
-        .get(`/files?parent=${dirId}`)
+        .get(`/files?parent=${dirId}`, userInfoAuth)
         .then((data) => data.data);
     }
     if (sort) {
-      return instanceAxios.get(`/files?sort=${sort}`).then((data) => data.data);
+      return instanceAxios.get(`/files?sort=${sort}`, userInfoAuth).then((data) => data.data);
     }
     if (dirId && sort) {
       return instanceAxios
-        .get(`/files?parent=${dirId}&sort=${sort}`)
+        .get(`/files?parent=${dirId}&sort=${sort}`, userInfoAuth)
         .then((data) => data.data);
     }
-    return instanceAxios.get(`/files`).then((data) => data.data);
+    return instanceAxios.get(`/files`, userInfoAuth).then((data) => data.data);
   },
 
   createDir(dirId, name) {
@@ -36,7 +38,7 @@ export const fileAPI = {
         name,
         parent: dirId,
         type: "dir",
-      })
+      }, userInfoAuth)
       .then((data) => data.data);
   },
 
@@ -69,6 +71,7 @@ export const fileAPI = {
             );
           }
         },
+        headers: { Authorization:  localStorage.getItem('tokenStore') }
       })
       .then((data) => data.data);
   },

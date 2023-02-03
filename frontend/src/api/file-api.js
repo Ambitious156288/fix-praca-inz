@@ -6,7 +6,7 @@ import {
 
 import axios from "axios";
 
-const SERVER_HOST = "http://localhost:8080/";
+const SERVER_HOST = "https://backend-praca-inz.herokuapp.com/";
 
 const userInfoAuth =  { headers: { Authorization:  localStorage.getItem('tokenStore') }};
 

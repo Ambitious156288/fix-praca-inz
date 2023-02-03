@@ -45,7 +45,7 @@ app.use(staticMiddleware(path.resolve(__dirname, "static")));
 app.use(express.json());
 app.use("/api/files/", variousFilesRouter);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const filesPath = path.resolve(__dirname, "files");
 const staticPath = path.resolve(__dirname, "static");

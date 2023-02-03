@@ -57,13 +57,15 @@ function PhotoGallery() {
     }
   }
 
+  const BACKEND_API = 'https://backend-praca-inz.herokuapp.com/'
+
 const handleDeleteImage = async (id)=>{
-    await axios.delete('http://localhost:8080/api/single/' + id)
+    await axios.delete(`${BACKEND_API}api/single/` + id)
     setSingleFiles(prev=>prev.filter(file=>file._id !== id))
 }
 
 const handleDeleteGallery = async (galleryId)=>{
-    await axios.delete('http://localhost:8080/api/gallery/' + galleryId)
+    await axios.delete(`${BACKEND_API}api/gallery/` + galleryId)
     setMultipleFiles(prev=>prev.filter(gallery=>gallery._id !== galleryId))
 }
 
@@ -87,9 +89,9 @@ useEffect(() => {
                                                   <div className="container">
                                                           <ImageGroup >
                                                               <ul className="images">
-                                                                <li key={`http://localhost:8080/${file.filePath}`}>
+                                                                <li key={`${BACKEND_API}${file.filePath}`}>
                                                                   <Image 
-                                                                    src={`http://localhost:8080/${file.filePath}`}
+                                                                    src={`${BACKEND_API}${file.filePath}`}
                                                                     alt="nature"
                                                                   />
                                                                 <Button size="small" variant="contained" color="secondary" onClick={() => handleDeleteImage(file._id)}>Delete</Button>
@@ -112,9 +114,9 @@ useEffect(() => {
                                                 <div className="container">
                                                           <ImageGroup >
                                                               <ul className="images">
-                                                                <li key={`http://localhost:8080/${file.filePath}`}>
+                                                                <li key={`${BACKEND_API}${file.filePath}`}>
                                                                   <Image 
-                                                                    src={`http://localhost:8080/${file.filePath}`}
+                                                                    src={`${BACKEND_API}${file.filePath}`}
                                                                     alt="nature"
                                                                   />
                                                                 </li>

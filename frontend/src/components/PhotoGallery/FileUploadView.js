@@ -99,7 +99,7 @@ const FileUploadView = (props) => {
                             <label>Select Multiple Files</label>
                             <br/>
                             <br/>
-                            <TextField  label="enter title for your gallery" variant="outlined" type="text" onChange={(e) => setTitle(e.target.value) } />
+                            <TextField label="enter title for your gallery" variant="outlined" type="text" onChange={(e) => setTitle(e.target.value) } />
                             <br/>
                             <br/>
                             <input accept="image/*" type="file" id="raised-button-files" style={{ display: 'none' }} onChange={(e) => MultipleFileChange(e)} multiple/>

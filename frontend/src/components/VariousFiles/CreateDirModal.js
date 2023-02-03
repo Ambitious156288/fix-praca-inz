@@ -43,6 +43,7 @@ export const Button = styled.button`
   border-radius: 5px;
   margin-left: 15px;
   transition: all 0.3s ease;
+  margin-top: 20px;
 
   &:hover {
     background-color: ${(props) => props.hoverColor};

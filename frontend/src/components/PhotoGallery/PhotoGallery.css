@@ -76,5 +76,9 @@ ul.images {
   button.fullscreen-toggle{
     display: none;
   }
+
+  .MuiOutlinedInput-input {
+    padding: 18.5px 20px !important;
+  }
   
   
